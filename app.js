@@ -5,6 +5,7 @@ const app = express();
 const recipeRoutes = require('./routes/recipe');
 const faceSnapsRoutes = require('./routes/faceSnaps');
 const postsRoutes = require('./routes/posts');
+const userRoutes = require('./routes/user');
 
 mongoose.connect('mongodb+srv://ErrolFieschi:ef30101997@cluster0.oqn9wxv.mongodb.net/test', 
 {
@@ -26,5 +27,7 @@ app.use((req, res, next) => {
 app.use('/api/recipes', recipeRoutes);
 app.use('/api/facesnaps',faceSnapsRoutes);
 app.use('/api/posts', postsRoutes);
+app.use('/api/auth', userRoutes);
+
 
 module.exports = app;
