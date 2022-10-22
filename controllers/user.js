@@ -4,15 +4,17 @@ const User = require('../models/User');
 
 
 exports.signup = (req, res, next) => {
-    bcrypt.hash(req.body.password, 10)
+    //console.log(req);
+    //console.log("show username in loginfo : " + req.body.loginInfo.username);
+    bcrypt.hash(req.body.loginInfo.password, 10)
         .then(hash => {
             const user = new User({
-                username: req.body.username,
-                email: req.body.email,
+                username: req.body.loginInfo.username,
+                email: req.body.emailGroup.email,
                 password: hash
             });
             user.save()
-                .then(() => res.status(201).json({ message: 'Utilisateur ' + req.body.username + ' bien enregistré'}))
+                .then(() => res.status(201).json({ message: 'Utilisateur ' + req.body.loginInfo.username + ' bien enregistré'}))
                 .catch(error => res.status(400).json({ error }));
         })
         .catch(error => res.status(500).json({ error }));
