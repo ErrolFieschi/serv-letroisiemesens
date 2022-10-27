@@ -15,7 +15,7 @@ exports.signup = (req, res, next) => {
             });
             user.save()
                 .then(() => res.status(201).json({ message: 'Utilisateur ' + req.body.loginInfo.username + ' bien enregistré'}))
-                .catch(error => res.status(400).json({ error }));
+                .catch(error => res.status(400).json("Une erreur est survenue, l'email est peut-être déjà utilisée"));
         })
         .catch(error => res.status(500).json({ error }));
 };
@@ -88,7 +88,7 @@ exports.login = (req, res, next) => {
                         userId: user._id,
                         token: jwt.sign(
                             { userId: user._id },
-                            'RANDOM_TOKEN_SECRET',
+                            process.env.ACCESS_TOKEN_SECRET,
                             { expiresIn: '24h' }
                         )
                     });

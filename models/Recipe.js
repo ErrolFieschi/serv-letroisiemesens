@@ -12,7 +12,8 @@ const recipeSchema = mongoose.Schema({
     eaters: { type: Number, required: true },
     comments: { type: Array, required: true },
     gallery: { type: Array, required: true },
-    type: { type: String, required: true }
+    type: { type: String, required: true },
+    userId: {type: String, required: true}
     
 });
 

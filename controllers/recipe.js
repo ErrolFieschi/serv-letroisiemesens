@@ -12,7 +12,22 @@ exports.findAllRecipes = (req, res, next) => {
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while retrieving tutorials."
+                    err.message || "Erreur durant la recherche des recettes"
+            });
+        });
+};
+
+exports.findMyRecipes = (req, res, next) => { //essayer de le mettre dans fine all recipes avec un filter, quoi que je pourrait pas faire l'auth si je fais ça a voir, peu etre que si
+    //const userId = req.query.userId;
+    //    var condition = userId ? { userId: userId };
+    var query = { userId : req.auth.userId};
+    Recipe.find(query)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "erreur durant la recherche des recettes"
             });
         });
 };
