@@ -21,57 +21,6 @@ exports.signup = (req, res, next) => {
 };
 
 
-// exports.login = (req, res, next) => {
-//     User.findOne({ email: req.body.email })
-//         .then(user => {
-//             if (!user) {
-//                 User.findOne({ username: req.body.username })
-
-//                     .then(username => {
-//                         if (!username) {
-//                             return res.status(401).json({ error: 'Utilisateur non trouvé !' });
-//                         }
-
-//                         bcrypt.compare(req.body.password, user.password)
-//                             .then(valid => {
-//                                 if (!valid) {
-//                                     return res.status(401).json({ error: 'Mot de passe incorrect !' });
-//                                 }
-//                                 res.status(200).json({
-//                                     userId: user._id,
-//                                     token: jwt.sign(
-//                                         { userId: user._id },
-//                                         'RANDOM_TOKEN_SECRET',
-//                                         { expiresIn: '24h' }
-//                                     )
-//                                 });
-//                             })
-//                             .catch(error => res.status(500).json({ error }));
-//                     })
-//                     .catch(error => res.status(500).json({ error }));
-//             }
-//             bcrypt.compare(req.body.password, user.password)
-//                 .then(valid => {
-//                     if (!valid) {
-//                         return res.status(401).json({ error: 'Mot de passe incorrect !' });
-//                     }
-//                     res.status(200).json({
-//                         userId: user._id,
-//                         token: jwt.sign(
-//                             { userId: user._id },
-//                             'RANDOM_TOKEN_SECRET',
-//                             { expiresIn: '24h' }
-//                         )
-//                     });
-//                 })
-//                 .catch(error => res.status(500).json({ error }));
-
-//         })
-//         .catch(error => res.status(500).json({ error }));
-// };
-
-
-
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
     //User.findOne({ username: req.body.username })
@@ -88,7 +37,7 @@ exports.login = (req, res, next) => {
                         userId: user._id,
                         token: jwt.sign(
                             { userId: user._id },
-                            process.env.ACCESS_TOKEN_SECRET,
+                            '49e8878ccff74aa107acc2d10e542d1a4550d124e079fefa7c71f3d219bea174495492f9c8f0498da264236cdd03338a5141f45c8d7bbf072af9142757c21077',
                             { expiresIn: '24h' }
                         )
                     });
@@ -97,33 +46,3 @@ exports.login = (req, res, next) => {
         })
         .catch(error => res.status(500).json({ error }));
  };
-
-
-
-
-// exports.login = (req, res, next) => {
-//     User.findOne({ email: req.body.email })
-
-//         .then(user => {
-
-//             if (!user) {
-//                 return res.status(401).json({ error: 'Utilisateur non trouvé !' });
-//             }
-//             bcrypt.compare(req.body.password, user.password)
-//                 .then(valid => {
-//                     if (!valid) {
-//                         return res.status(401).json({ error: 'Mot de passe incorrect !' });
-//                     }
-//                     res.status(200).json({
-//                         userId: user._id,
-//                         token: jwt.sign(
-//                             { userId: user._id },
-//                             'RANDOM_TOKEN_SECRET',
-//                             { expiresIn: '24h' }
-//                         )
-//                     });
-//                 })
-//                 .catch(error => res.status(500).json({ error }));
-//         })
-//         .catch(error => res.status(500).json({ error }));
-// };
