@@ -20,7 +20,7 @@ exports.findAllRecipes = (req, res, next) => {
 exports.findMyRecipes = (req, res, next) => { //essayer de le mettre dans fine all recipes avec un filter, quoi que je pourrait pas faire l'auth si je fais ça a voir, peu etre que si
     //const userId = req.query.userId;
     //    var condition = userId ? { userId: userId };
-    var query = { userId : req.auth.userId};
+    var query = { userId: req.auth.userId };
     Recipe.find(query)
         .then(data => {
             res.send(data);
@@ -74,10 +74,10 @@ exports.findRecipe = (req, res, next) => {
 
 
 exports.createRecipe = (req, res, next) => {
-    console.log(req.body._id);
     delete req.body._id;
     const recipe = new Recipe({
         ...req.body,
+        userId: req.auth.userId
     });
     recipe.save()
         .then(() => res.status(201).json({ message: 'Recette ' + req.body.title + ' bien enregistré.' }))

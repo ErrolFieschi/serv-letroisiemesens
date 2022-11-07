@@ -6,7 +6,7 @@ const auth = require('../middleware/auth');
 
 
 
-router.post('/',recipeController.createRecipe);
+router.post('/',auth, recipeController.createRecipe);
 router.get('/:id', recipeController.findRecipeById);
 router.get('/', recipeController.findAllRecipes);
 router.get('/recipes/my-recipes',auth, recipeController.findMyRecipes);
