@@ -1,6 +1,13 @@
 const http = require('http');
+var https = require('https');
 const { off } = require('process');
 const app = require('./app');
+
+const options = {
+    key: fs.readFileSync('key.pem'),
+    cert: fs.readFileSync('cert.pem')
+  };
+  
 
 const normalizePort = val => {
     const port = parseInt(val, 10);
@@ -45,5 +52,11 @@ server.on('listening', () => {
     const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port;
     console.log('Listening on ' + bind);
 });
+
+
+https.createServer(options, function (req, res) {
+    res.writeHead(200);
+    res.end("hello world\n");
+  }).listen(8000, '0.0.0.0');
 
 server.listen(3000, '0.0.0.0');

@@ -24,10 +24,10 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use('/api/auth', userRoutes);
 app.use('/api/recipes', recipeRoutes);
 app.use('/api/facesnaps',faceSnapsRoutes);
 app.use('/api/posts', postsRoutes);
-app.use('/api/auth', userRoutes);
 
 
 module.exports = app;
